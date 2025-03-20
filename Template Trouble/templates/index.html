@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Haven</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .book-card {
+            transition: transform 0.3s ease-in-out;
+        }
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-5xl font-extrabold text-center mb-10 text-indigo-500">Book Haven</h1>
+        <p class="text-center text-lg text-gray-300 mb-8">Explore our extensive collection of books and immerse yourself in new worlds!</p>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <!-- Book Card 1 -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg book-card">
+                <h2 class="text-2xl font-bold text-indigo-500 mb-4">The Art of Magic</h2>
+                <p class="text-gray-300 mb-4">A deep dive into the art and science of magic.</p>
+                <span class="block text-lg font-bold text-indigo-500 mb-4">$29.99</span>
+                <button class="w-full bg-indigo-500 text-white py-2 rounded hover:bg-indigo-600">Add to Cart</button>
+            </div>
+
+            <!-- Book Card 2 -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg book-card">
+                <h2 class="text-2xl font-bold text-indigo-500 mb-4">Ancient Runes</h2>
+                <p class="text-gray-300 mb-4">Unlock the secrets of ancient languages and symbols.</p>
+                <span class="block text-lg font-bold text-indigo-500 mb-4">$39.99</span>
+                <button class="w-full bg-indigo-500 text-white py-2 rounded hover:bg-indigo-600">Add to Cart</button>
+            </div>
+
+            <!-- Book Card 3 -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg book-card">
+                <h2 class="text-2xl font-bold text-indigo-500 mb-4">The Sorcery Compendium</h2>
+                <p class="text-gray-300 mb-4">A comprehensive guide to the world of sorcery and spells.</p>
+                <span class="block text-lg font-bold text-indigo-500 mb-4">$49.99</span>
+                <button class="w-full bg-indigo-500 text-white py-2 rounded hover:bg-indigo-600">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Template Input Form (Vulnerable to SSTI) -->
+        <form action="/render" method="POST" class="mb-8 bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="mb-4">
+                <label for="template" class="block text-lg font-medium mb-2 text-gray-300">Customize Your Book Order:</label>
+                <textarea id="template" name="template" rows="4" class="w-full p-2 border border-gray-600 rounded bg-gray-900 text-gray-100">{{ template if template else '' }}</textarea>
+            </div>
+            <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">Submit Order</button>
+        </form>
+
+        <!-- Rendered Output (SSTI Injection Point) -->
+        {% if rendered %}
+        <div class="fade-in mt-6 p-4 bg-gray-800 border border-gray-600 rounded">
+            <h2 class="text-2xl font-bold mb-4 text-indigo-500">Order Summary:</h2>
+            <pre class="whitespace-pre-wrap text-gray-300">{{ rendered }}</pre>
+        </div>
+        {% endif %}
+
+        <!-- Error Message -->
+        {% if error %}
+        <div class="fade-in mt-8 p-4 bg-red-900 border border-red-600 rounded">
+            <p class="text-red-200"><strong>Error:</strong> {{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
