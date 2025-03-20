@@ -1,0 +1,20 @@
+name: Jailbreak
+author: SALMA
+category: Web
+description: |-
+  Locked doors are meant to be opened. Find the weak link.
+
+  > SALMA
+tags:
+  - easy
+flags:
+  - BAU{JWT_Tampering_In_Space}
+state: hidden
+value: 600
+type: static
+files:
+  - admin.php
+  - dashboard.php
+  - docker-compose.yml
+  - dockerfile
+  - index.php
