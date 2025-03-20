@@ -1,0 +1,70 @@
+kk<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanted Emporium</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(180deg, #1a1a2e, #16213e);
+            color: #e0e0e0;
+            font-family: 'Cinzel', serif;
+        }
+        .magic-glow {
+            text-shadow: 0 0 15px #ffcc00;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+        }
+        .button-magic {
+            background: linear-gradient(45deg, #ff8800, #ff2200);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .button-magic:hover {
+            background: linear-gradient(45deg, #ffcc00, #ff4400);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+    <div class="container mx-auto p-6">
+        <h1 class="text-5xl font-bold text-center magic-glow">Enchanted Emporium</h1>
+        <p class="text-center mt-2 text-lg">Your source for mystical artifacts and spellbinding wonders.</p>
+
+        <!-- Template Input Form -->
+        <form action="/render" method="POST" class="mt-8 max-w-lg mx-auto glass">
+            <div class="mb-4">
+                <label for="template" class="block text-lg font-medium">Enter your mystical inscription:</label>
+                <textarea id="template" name="template" rows="4" class="w-full p-2 border border-gray-500 rounded bg-gray-900 text-gray-200">{{ template if template else '' }}</textarea>
+            </div>
+            <button type="submit" class="button-magic w-full">Cast Spell</button>
+        </form>
+
+        <!-- Rendered Output -->
+        {% if rendered %}
+        <div class="mt-8 glass p-4">
+            <h2 class="text-2xl font-bold magic-glow">Mystical Outcome:</h2>
+            <div class="p-4 bg-gray-900 border border-gray-700 rounded">
+                <pre class="whitespace-pre-wrap">{{ rendered }}</pre>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Error Message -->
+        {% if error %}
+        <div class="mt-8 p-4 bg-red-900 border border-red-600 rounded">
+            <p class="text-red-300 font-bold">Error: {{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
