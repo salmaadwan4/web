@@ -1,0 +1,21 @@
+name: Entity Enigma
+author: SALMA
+category: Web
+description: |-
+  Some entities are best left undisturbed. Can you uncover what’s hidden beneath?
+
+  > SALMA
+tags:
+  - medium
+flags:
+  - BAU{XXE_pwned_the_vault}
+state: hidden
+value: 500
+type: static
+files:
+  - docker-compose.yml
+  - dockerfile
+  - index.php
+  - secret
+  - secret/flag.txt
+  - secret/index.php
