@@ -1,0 +1,20 @@
+FROM php:8.1-apache
+
+RUN apt-get update && apt-get install -y \
+    libxml2-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd dom \
+    && a2enmod rewrite headers
+
+COPY . /var/www/html/
+COPY flag.txt /flag.txt
+RUN chmod 644 /flag.txt
+
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && echo "expose_php = Off" >> /usr/local/etc/php/conf.d/security.ini \
+    && echo "display_errors = Off" >> /usr/local/etc/php/conf.d/security.ini
+
+EXPOSE 80
